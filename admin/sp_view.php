@@ -64,6 +64,7 @@ include 'assets/include/admin_header.php';
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Address</th>
                                 <th>City</th>
                                 <th>Pincode</th>
                                 <th>Status</th>
@@ -85,6 +86,7 @@ include 'assets/include/admin_header.php';
                                     $sp_name = $row['sp_name'];
                                     $email = $row['email'];
                                     $phone = $row['phone'];
+                                    $address = $row['address'];
                                     $city = $row['city_name'];
                                     $pincode = $row['pincode'];
                                     $status = $row['status'];
@@ -95,6 +97,7 @@ include 'assets/include/admin_header.php';
                                         <td><?php echo $sp_name ?></td>
                                         <td><?php echo $email ?></td>
                                         <td><?php echo $phone ?></td>
+                                        <td><?php echo $address ?></td>
                                         <td><?php echo $city ?></td>
                                         <td><?php echo $pincode ?></td>
                                         <td>
@@ -140,6 +143,7 @@ include 'assets/include/admin_header.php';
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Address</th>
                                 <th>City</th>
                                 <th>Pincode</th>
                                 <th>Status</th>

@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sp_name = $_POST["sp_name"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
+    $address = $_POST["address"];
     $city_name = $_POST["sp_city"];
     $pincode = $_POST["pincode"];
     $username = $_POST["username"];
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $city_row = mysqli_fetch_assoc($fetch_city_result);
                 $city_id = $city_row['city_id'];
                 // $sql2 = "INSERT INTO `sp` (`sp_id`, `login_id`, `sp_name`, `email`, `phone`, `city_id`, `pincode`) VALUES (NULL, '16', 'deepkorat', 'deepkorat213@gmail.com', '9687480417', '5', '341262')";
-                $sql2 = "INSERT INTO `sp` (`sp_id`, `login_id`, `sp_name`, `email`, `phone`, `city_id`, `pincode`, `status`) VALUES ('', '$login_id', '$sp_name', '$email','$phone','$city_id', '$pincode', 'deactive')";
+                $sql2 = "INSERT INTO `sp` (`sp_id`, `login_id`, `sp_name`, `email`, `phone`, `address`,`city_id`, `pincode`, `status`) VALUES ('', '$login_id', '$sp_name', '$email','$phone','$address','$city_id', '$pincode', 'deactive')";
                 $result2 = mysqli_query($conn, $sql2);
                 if ($result2) {
                     $showAlert = "Your account is now created.";
@@ -133,7 +134,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
 
-
+<!-- Address line -->
+<div class="form-row">
+                    <div class="mb-3 col-12">
+                        <label for="validationTextarea">Address:-</label>
+                        <textarea class="form-control" id="validationTextarea" name="address" placeholder="Enter your home address" required></textarea>
+                        <div class="invalid-feedback">
+                            Please enter your address.
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -160,10 +170,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </select>
                         <div class="invalid-feedback">Please choose a city.</div>
                     </div>
-                    <div class="form-group col-md-2 input-group-sm">
+                    <div class="form-group col-md-3 input-group-sm">
                         <label for="Pincode">Pincode</label>
                         <input type="text" class="form-control" pattern="\d{6}" name="pincode" id="pincode" required>
                     </div>
+                    <div class="form-group col-md-3 input-group-sm">
+                        <label for="Adhaarcard">Adhaarcard</label>
+                        <input type="file" name="imageUpload" id="imageUpload" required> 
+                    </div> 
                 </div>
                 <hr class="mt-4 mb-4">
 

@@ -6,8 +6,14 @@ include '../db/dbconnect.php';
 $title = 'Main';
 $css_directory = '../css/main.min.css';
 $css_directory2 = '../css/main.min.css.map';
+
 include 'includes/header.php';
 include 'includes/navbar.php';
+$login_id=$_SESSION["login_id"];
+$result = $conn->query("SELECT * FROM customer where login_id='".$login_id."'");
+$customer_data=$result->fetch_assoc();
+$full_name=$customer_data["first_name"]." ".$customer_data["last_name"];
+// print_r($customer_data);
 ?>
 
 <body>
@@ -17,8 +23,14 @@ include 'includes/navbar.php';
         <div class="row">
             <div class="col-lg-12 mt-4">
                 <?php
+
+               
+
+
                 //Alert OR Error Message:
-                if (isset($_SESSION['removesuccess'])) {
+                
+                if (isset($_SESSION['removesuccess'])) 
+                {
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success! </strong> ' . $_SESSION['removesuccess'] . '
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -85,8 +97,15 @@ include 'includes/navbar.php';
                         </thead>
                         <tbody class="text-center">
                             <?php
+
+                            
+                            
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 $sr = $key + 1;
+                                // if($key=="login_id")
+                                // {
+                                //     $login_id=$value;
+                                // }
                             ?>
                                 <tr>
                                     <th scope="row"><?php echo $sr; ?></th>
@@ -133,20 +152,20 @@ include 'includes/navbar.php';
                             <form action="order.php" method="post">
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" name="full_name" id="fullname" required>
+                                    <input type="text" class="form-control" name="full_name" id="fullname" value="<?php echo  $full_name;?>" required >
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="tel" class="form-control" required pattern="^[0-9-+\s()]{10}" name="phone" aria-describedby="phoneFeedback" data-for="phoneNumber">
+                                    <input type="tel" class="form-control" required pattern="^[0-9-+\s()]{10}" name="phone" aria-describedby="phoneFeedback" data-for="phoneNumber" value="<?php echo  $customer_data['phone'];?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea name="address" id="address" cols="25" rows="3" required></textarea>
+                                    <textarea name="address" id="address" cols="25" rows="3" required><?php echo  $customer_data['address'];?></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Pincode</label>
-                                    <input type="text" class="form-control" pattern="\d{6}" name="pincode" id="pincode" required>
+                                    <input type="text" class="form-control" pattern="\d{6}" name="pincode" id="pincode" value="<?php echo  $customer_data['pincode'];?>" required>
                                 </div>
 
                                 <div class="form-group">
@@ -164,12 +183,12 @@ include 'includes/navbar.php';
                                         Cash On Delivery
                                     </label>
                                 </div>
-                                <!-- <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="pay_mode" id="exampleRadios2" value="Gpay">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pay_mode" id="exampleRadios2" value="Cerdit/Debit Card">
                                     <label class="form-check-label" for="exampleRadios2">
-                                        GPay
+                                    Cerdit/Debit Card
                                     </label>
-                                </div> -->
+                                </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary btn-block" name="order">Make Order</button>
                                 <input type="hidden" id="total" name="total">
